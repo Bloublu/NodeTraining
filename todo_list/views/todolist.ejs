@@ -8,7 +8,26 @@
 </head>
 <body>
     <h1>Todo List</h1>
-    
+
+    <form action="/task" method="POST">
+        <input type="text" name="task" placeholder="Nouvelle Tache" autofocus>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <h3>Mes Taches :</h3>
+    <ul>
+        <% tasks.forEach((task) =>{ %>
+            <% if(task.done){ %>
+                <li>
+                    <s><%= task.title %></s> | <a href="#">Suprrimer</a>
+                </li>
+            <% } else { %>
+                <li>
+                    <%= task.title %> | <a href="#">Terminer</a>
+                </li>
+            <% } %>
+        <% }) %>
+    </ul>
     
 </body>
 </html>
