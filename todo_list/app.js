@@ -29,6 +29,16 @@ app.post('/task', (req, res) => {
     res.redirect('/');
 });
 
+app.get('/task/:id/done', (req, res) => {
+    tasks[req.params.id].done = true;
+    res.redirect('/');
+});
+
+app.get('/task/:id/delete', (req, res) => {
+    tasks.splice(req.params.id, 1);
+    res.redirect('/');
+});
+
 app.listen(port, (req, res) => {
    console.log(`Server lancé sur le port ${port}`);
 });
