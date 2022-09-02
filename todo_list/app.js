@@ -1,41 +1,56 @@
+
 const express = require('express');
 const app = express();
+const session = require('express-session');
 const port = 3000;
 
-const tasks = [
-    {
-        title: "apprendre Nodejs",
-        done: false,
-    },
-    {
-        title: "faire les courses",
-        done: true,
-    }
-];
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
+app.use(express.static(__dirname + '/public'));
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+}));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render('todolist', {tasks: tasks});
+    if (!req.session.tasks){
+        req.session.tasks = [];
+    }
+    res.render('todolist', {tasks: req.session.tasks.sort(((a, b) => Number(a.done) - Number(b.done)))});
 });
 
 app.post('/task', (req, res) => {
-    tasks.push({
-        title: req.body.task,
-        done: false,
-    });
+    if(req.body.task){
+        req.session.tasks.push({
+            title: req.body.task,
+            done: false,
+        });
+    }
     res.redirect('/');
 });
 
 app.get('/task/:id/done', (req, res) => {
-    tasks[req.params.id].done = true;
-    res.redirect('/');
+        if(req.session.tasks[req.params.id]) {
+                req.session.tasks[req.params.id].done = true;
+        }
+        res.redirect('/');
 });
 
 app.get('/task/:id/delete', (req, res) => {
-    tasks.splice(req.params.id, 1);
+    if(req.session.tasks[req.params.id]) {
+        req.session.tasks.splice(req.params.id, 1);
+    }   
+    res.redirect('/');
+});
+
+app.get('/task/:id/cancel', (req, res) => {
+    if(req.session.tasks[req.params.id]) {
+        req.session.tasks[req.params.id].done = false;
+    }
     res.redirect('/');
 });
 

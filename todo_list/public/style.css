@@ -1,0 +1,44 @@
+body {
+    background-image: radial-gradient(circle, rgba(104, 209, 216, 0.5), rgba(1, 1, 108, 0.68)), url("images/fonds.jpg");
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+form {
+    text-align: center;
+}
+
+input {
+    width: 300px;
+}
+
+#btn {
+    background-color: rgba(104, 209, 216, 0.5);
+    width: 100px;
+}
+
+h3 {
+    margin-left: 20px;
+    color: white;
+}
+
+li {
+    margin: 10px;
+    padding-left: 20px;
+    color: white;
+    font-size: 1.5em;
+}
+
+a {
+    color: rgb(0, 238, 255);
+}
+
+#confettis {
+    background-color: rgba(104, 209, 216, 0.5);
+    width: 250px;
+    height: 25px;  
+}
