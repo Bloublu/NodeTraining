@@ -4,30 +4,66 @@
     <meta charset='utf-8'>
     <title>Todo List</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' href='/style.css'>
+    <script  src =" https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js "> </script>
+
 </head>
 <body>
     <h1>Todo List</h1>
 
     <form action="/task" method="POST">
-        <input type="text" name="task" placeholder="Nouvelle Tache" autofocus>
-        <button type="submit">Ajouter</button>
+        <input type="text" name="task" placeholder="Nouvelle Tache" autofocus required>
+        <button type="submit" id="btn">Ajouter</button>
     </form>
-
     <h3>Mes Taches :</h3>
     <ul>
         <% tasks.forEach((task, idx) =>{ %>
             <li>
                 <% if(task.done){ %>
-                    <strong><%= idx %></strong>
-                    <s><%= task.title %></s> | <a href="/task/<%= idx %>/delete">Supprimer</a>                    
+                    <s><%= task.title %></s>    | <a href="/task/<%= idx %>/delete">Supprimer</a> 
+                                                | <a href="/task/<%= idx %>/cancel">Annuler</a>                     
                 <% } else { %>                   
-                    <strong><%= idx %></strong>
-                    <%= task.title %> | <a href="/task/<%= idx %>/done">Terminer</a>
+                    <%= task.title %> | <a href="/task/<%= idx %>/done">Terminer</a><br>
                 <% } %>
             </li>
         <% }) %>
-    </ul>
-    
+        <% if (tasks.length <= 0) { %>
+            <li> 
+                Youhouuu on n'a plus de tache a faire...
+                <button id="confettis"> Clique ici pour faire la fete !</button>
+            </li>
+        <% } %>
+    </ul>    
+
+    <script>
+        let confe = document.getElementById('confettis');
+        confe.addEventListener('click', () =>{
+            var end = Date.now() + (15 * 1000);
+
+            // go Buckeyes!
+            var colors = ['#bb0000', '#ffffff'];
+
+            (function frame() {
+            confetti({
+                particleCount: 2,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: colors
+            });
+            confetti({
+                particleCount: 2,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: colors
+            });
+
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+            }());
+        });
+    </script>
 </body>
 </html>
