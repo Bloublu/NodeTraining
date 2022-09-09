@@ -2,7 +2,7 @@
 // even lorsqu'on a plus de Taches    
 let allConfe = document.getElementById('allConfettis');
 allConfe.addEventListener('click', ()=>{
-    let end = Date.now() + (10 * 1000);
+    let end = Date.now() + (4 * 1000);
     // go Buckeyes!
     let colors = ['#bb0000', '#ffffff'];
     (function frame() {
@@ -25,11 +25,11 @@ allConfe.addEventListener('click', ()=>{
     }
     }());
     repeatCofetti();
+    setTimeout(function() { repeatCofetti() }, 1000);
+    setTimeout(function() { repeatCofetti() }, 2000);
     setTimeout(function() { repeatCofetti() }, 3000);
-    setTimeout(function() { repeatCofetti() }, 5000);
-    setTimeout(function() { repeatCofetti() }, 7000);
-    setTimeout(function() { repeatCofetti() }, 10000);
-    setTimeout(function() { repeatCofetti() }, 12000);
+    setTimeout(function() { repeatCofetti() }, 3500);
+    setTimeout(function() { repeatCofetti() }, 4000);
 });
 
 allConfe.addEventListener("mouseover", function() {
