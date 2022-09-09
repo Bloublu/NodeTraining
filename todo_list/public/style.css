@@ -10,18 +10,22 @@ h1 {
 
 form {
     text-align: center;
+    margin: 50px;
 }
 
 input {
     width: 300px;
+    height: 25px;
 }
 
 #btn {
     background-color: rgba(104, 209, 216, 0.5);
     width: 100px;
+    height: 30px;
 }
 
 h3 {
+    clear: both;
     margin-left: 20px;
     color: white;
 }
@@ -37,11 +41,8 @@ a {
     color: rgb(0, 238, 255);
 }
 
-#confettis {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-      
+img {
+    float: left;
+    margin: 20px;
 }

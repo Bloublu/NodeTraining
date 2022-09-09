@@ -4,16 +4,22 @@
     <meta charset='utf-8'>
     <title>Todo List</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' href='/style.css'>
-    <script  src =" https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js "> </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link rel='stylesheet' href='/style.css'> 
 </head>
 <body>
     <h1>Todo List</h1>
-    <button id="confettis"> 
-        <img style="width: 20px; height:auto;" src="../images/fete.jpg" alt="imgConffeti"> 
-        Fêter la fin d'une tache.
-    </button>
+
+    <% if(tasks.length <= 0) { %>
+
+            <img id="allConfettis" src="./images/grosseFete.png" alt="imgGrosseFete" style="width: 40px;"> 
+          
+    <% }else { %>    
+ 
+            <img id="oneConfetti" src="../images/fete.png" alt="imgfete"  style="width: 40px;"> 
+
+    <% } %> 
+
     <form action="/task" method="POST">
         <input type="text" name="task" placeholder="Nouvelle Tache" autofocus required>
         <button type="submit" id="btn">Ajouter</button>
@@ -30,37 +36,10 @@
                 <% } %>
             </li>
         <% }) %>
-    </ul>    
+    </ul>   
 
-    <script>
-        let confe = document.getElementById('confettis');
-        confe.addEventListener('click', () =>{
-            var end = Date.now() + (15 * 1000);
+<script src="./even.js"></script>
+<script src="./evenAll.js"></script>
 
-            // go Buckeyes!
-            var colors = ['#bb0000', '#ffffff'];
-
-            (function frame() {
-            confetti({
-                particleCount: 2,
-                angle: 60,
-                spread: 55,
-                origin: { x: 0 },
-                colors: colors
-            });
-            confetti({
-                particleCount: 2,
-                angle: 120,
-                spread: 55,
-                origin: { x: 1 },
-                colors: colors
-            });
-
-            if (Date.now() < end) {
-                requestAnimationFrame(frame);
-            }
-            }());
-        });
-    </script>
 </body>
 </html>
